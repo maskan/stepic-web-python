@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/trusty64"
     
     config.vm.network :private_network, ip: "192.168.44.44"
-    config.vm.network :forwarded_port, guest: 22, host: 2377
+    config.vm.network :forwarded_port, guest: 8000, host: 8000
     config.ssh.forward_agent = true
 
     # If ansible is in your path it will provision from your HOST machine
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
         config.vm.provision :shell, path: "ansible/windows.sh", args: ["stepic.lan"]
     end
 
-    config.vm.synced_folder "./", "/home/box/web", type: "nfs"
+    config.vm.synced_folder "./web", "/home/box/web", type: "nfs"
 
     config.vm.synced_folder "./ansible", "/vagrant", type: "nfs"
 end
